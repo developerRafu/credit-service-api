@@ -1,8 +1,7 @@
 package com.creditproject.creditserviceapi.domain.enums;
 
-import lombok.Getter;
-
 import java.util.Set;
+import lombok.Getter;
 
 @Getter
 public enum Profile {
@@ -15,7 +14,7 @@ public enum Profile {
     this.role = role;
   }
 
-    public static boolean isAdmin(final Set<Profile> profiles) {
-      return profiles.contains(Profile.ADMIN);
-    }
+  public static boolean isAdmin(final Set<Profile> profiles) {
+    return profiles.contains(Profile.ADMIN);
+  }
 }
