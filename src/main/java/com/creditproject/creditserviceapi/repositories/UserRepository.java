@@ -1,4 +1,4 @@
-package com.creditproject.creditserviceapi.domain.repositories;
+package com.creditproject.creditserviceapi.repositories;
 
 import com.creditproject.creditserviceapi.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

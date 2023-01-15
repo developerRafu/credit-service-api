@@ -1,5 +1,7 @@
 package com.creditproject.creditserviceapi.helpers;
 
+import static com.creditproject.creditserviceapi.helpers.UserConstantsEnum.*;
+
 import com.creditproject.creditserviceapi.domain.User;
 import com.creditproject.creditserviceapi.domain.enums.Profile;
 import java.util.Set;
@@ -22,9 +24,9 @@ public class UserMockBuilder {
   public UserMockBuilder defaultValues() {
     this.user
         .id(1L)
-        .email("user@mail.com")
-        .password("password")
-        .name("first user")
+        .email(USERNAME.getValueString())
+        .password(PASSWORD.getValueString())
+        .name(NAME.getValueString())
         .profiles(Set.of(Profile.USER));
     return this;
   }
