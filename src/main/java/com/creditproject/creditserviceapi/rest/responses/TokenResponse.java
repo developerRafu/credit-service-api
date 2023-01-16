@@ -1,6 +1,5 @@
 package com.creditproject.creditserviceapi.rest.responses;
 
-import com.creditproject.creditserviceapi.vo.enums.TokenEnum;
 import lombok.*;
 
 @Getter
@@ -9,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class TokenResponse {
-    private String type;
-    private String token;
-    private String duration;
+  private String type;
+  private String token;
+  private String duration;
 }
