@@ -37,7 +37,7 @@ public class AuthServiceImpl implements IAuthService {
   @Override
   public TokenResponse authenticate(final AuthenticationRequest request) {
     authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(request.getPassword(), request.getPassword()));
+        new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
     final var user = userService.findByEmail(request.getEmail());
     return user.map(User::getEmail)
         .map(jwtUtil::getToken)
