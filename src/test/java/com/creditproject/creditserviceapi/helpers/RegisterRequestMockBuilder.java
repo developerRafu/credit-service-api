@@ -15,14 +15,19 @@ public class RegisterRequestMockBuilder {
   }
 
   public RegisterRequestMockBuilder defaultValues() {
-    request.setEmail(UserConstantsEnum.USERNAME.getValueString());
+    request.setEmail(UserConstantsEnum.USERNAME_2.getValueString());
     request.setPassword(UserConstantsEnum.PASSWORD.getValueString());
     request.setDocumento(UserConstantsEnum.DOCUMENT.getValueString());
-    request.setName(UserConstantsEnum.NAME.name());
+    request.setName(UserConstantsEnum.NAME.getValueString());
     return this;
   }
 
   public RegisterRequest build() {
     return request;
+  }
+
+  public RegisterRequestMockBuilder withEmail(final String email) {
+    request.setEmail(email);
+    return this;
   }
 }

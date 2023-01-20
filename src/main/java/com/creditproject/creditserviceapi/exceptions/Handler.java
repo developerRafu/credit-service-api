@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -70,12 +72,38 @@ public class Handler {
                 HttpStatus.NOT_FOUND.value()));
   }
 
+  @ExceptionHandler({HttpMediaTypeNotSupportedException.class})
+  public ResponseEntity<Message> handleHttpMediaTypeNotSupportedException(
+      final HttpMediaTypeNotSupportedException ex, HttpServletRequest request) {
+    final var message =
+        messageComponent.get(
+            MessageConstantsEnum.INVALID_REQUEST.getCode(),
+            MessageEnum.ERROR,
+            HttpStatus.BAD_REQUEST.value());
+    message.setDetails(List.of(ex.getLocalizedMessage()));
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+  }
+
+  @ExceptionHandler({BadCredentialsException.class})
+  public ResponseEntity<Message> handleBadCredentialsException(
+      final BadCredentialsException ex, HttpServletRequest request) {
+    final var message =
+        messageComponent.get(
+            MessageConstantsEnum.BAD_CREDENTIALS.getCode(),
+            MessageEnum.ERROR,
+            HttpStatus.FORBIDDEN.value());
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
+  }
+
   private Message getMessageDataIntegrity(final DataIntegrityViolationException ex) {
     if (ex.getMessage().contains("email")) {
-      return messageComponent.get(
-          MessageConstantsEnum.EMAIL_ALREADY_IN_USE.getCode(),
-          MessageEnum.ERROR,
-          HttpStatus.BAD_REQUEST.value());
+      final var message =
+          messageComponent.get(
+              MessageConstantsEnum.EMAIL_ALREADY_IN_USE.getCode(),
+              MessageEnum.ERROR,
+              HttpStatus.BAD_REQUEST.value());
+      message.setDetails(List.of(ex.getLocalizedMessage()));
+      return message;
     }
     final var message =
         messageComponent.get(
