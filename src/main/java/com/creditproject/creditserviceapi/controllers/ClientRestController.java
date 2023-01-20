@@ -2,14 +2,15 @@ package com.creditproject.creditserviceapi.controllers;
 
 import com.creditproject.creditserviceapi.mappers.ClientMapper;
 import com.creditproject.creditserviceapi.rest.requests.ClientRegisterRequest;
+import com.creditproject.creditserviceapi.rest.responses.ClientResponse;
 import com.creditproject.creditserviceapi.services.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/v1/clients")
@@ -21,6 +22,18 @@ public class ClientRestController {
   @PostMapping
   public ResponseEntity<Void> post(@RequestBody final ClientRegisterRequest request) {
     final var client = service.save(mapper.toClient(request));
-    return ResponseEntity.noContent().build();
+    final var uri =
+        ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(client.getId())
+            .toUri();
+    return ResponseEntity.created(uri).build();
+  }
+
+  @GetMapping
+  public ResponseEntity<Page<ClientResponse>> getByUser(
+      @RequestParam(defaultValue = "0") final int page) {
+    final var clients = service.findAllByUserLogged(PageRequest.of(page, 10));
+    return ResponseEntity.ok().body(clients.map(mapper::toResponse));
   }
 }

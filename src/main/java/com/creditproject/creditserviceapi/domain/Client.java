@@ -20,7 +20,6 @@ public class Client {
   @Column(unique = true)
   private String email;
 
-  @Column(unique = true)
   private String document;
 
   private Long userId;
