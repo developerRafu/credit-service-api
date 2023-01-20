@@ -1,6 +1,6 @@
 package com.creditproject.creditserviceapi.services;
 
-import static com.creditproject.creditserviceapi.helpers.UserConstantsEnum.USERNAME;
+import static com.creditproject.creditserviceapi.helpers.enums.UserConstantsEnum.USERNAME;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;

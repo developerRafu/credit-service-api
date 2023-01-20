@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.util.ObjectUtils;
 
 public class JsonUtils {
+  private JsonUtils(){}
   public static String convertToString(final ObjectMapper objectMapper, final Object obj) {
     if (ObjectUtils.isEmpty(obj)) {
       return null;

@@ -48,6 +48,28 @@ public class Handler {
                 ex.getUsername()));
   }
 
+  @ExceptionHandler(InvalidProfileException.class)
+  public ResponseEntity<Message> handleInvalidProfileException(
+      final InvalidProfileException ex, HttpServletRequest request) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(
+            messageComponent.get(
+                MessageConstantsEnum.INVALID_PROFILE.getCode(),
+                MessageEnum.ERROR,
+                HttpStatus.NOT_FOUND.value()));
+  }
+
+  @ExceptionHandler(InvalidTokenException.class)
+  public ResponseEntity<Message> handleInvalidTokenException(
+      final InvalidTokenException ex, HttpServletRequest request) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+        .body(
+            messageComponent.get(
+                MessageConstantsEnum.INVALID_TOKEN.getCode(),
+                MessageEnum.ERROR,
+                HttpStatus.NOT_FOUND.value()));
+  }
+
   private Message getMessageDataIntegrity(final DataIntegrityViolationException ex) {
     if (ex.getMessage().contains("email")) {
       return messageComponent.get(
