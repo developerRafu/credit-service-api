@@ -23,4 +23,9 @@ public class AuthenticationRequestMockBuilder {
   public AuthenticationRequest build() {
     return request;
   }
+
+  public AuthenticationRequestMockBuilder withPassword(final String password) {
+    request.setPassword(password);
+    return this;
+  }
 }

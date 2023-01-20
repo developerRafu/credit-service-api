@@ -5,6 +5,8 @@ import com.creditproject.creditserviceapi.domain.Client;
 import com.creditproject.creditserviceapi.repositories.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,5 +19,10 @@ public class ClientService {
     final var user = jwtUtil.getAuth();
     client.setUserId(user.getId());
     return repository.save(client);
+  }
+
+  public Page<Client> findAllByUserLogged(final PageRequest page) {
+    final var user = jwtUtil.getAuth();
+    return repository.findAllByUserId(user.getId(), page);
   }
 }

@@ -16,7 +16,11 @@ public class DbConfig {
   @Bean
   public TokenResponse saveFirstUser() {
     final var request =
-        RegisterRequest.builder().name("first user").email("user@mail.com").password("123").build();
+        RegisterRequest.builder()
+            .name("first user")
+            .email("user@mail.com")
+            .password("password")
+            .build();
     return userService.register(request);
   }
 }

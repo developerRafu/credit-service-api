@@ -1,6 +1,12 @@
 package com.creditproject.creditserviceapi;
 
-import org.springframework.boot.test.context.SpringBootTest;
+import io.restassured.RestAssured;
+import org.junit.jupiter.api.BeforeAll;
 
-@SpringBootTest
-class CreditServiceApiApplicationTests {}
+class CreditServiceApiApplicationTests {
+
+  @BeforeAll
+  static void setUp() {
+    RestAssured.port = 8080;
+  }
+}

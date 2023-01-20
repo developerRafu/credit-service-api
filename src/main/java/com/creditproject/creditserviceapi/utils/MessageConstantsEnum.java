@@ -9,7 +9,9 @@ public enum MessageConstantsEnum {
   ADMIN_NOT_AVAILABLE("CS-003"),
   USER_NOT_FOUND("CS-004"),
   INVALID_PROFILE("CS-005"),
-  INVALID_TOKEN("CS-006");
+  INVALID_TOKEN("CS-006"),
+  INVALID_REQUEST("CS-007"),
+  BAD_CREDENTIALS("CS-008");
   private final String code;
 
   MessageConstantsEnum(final String code) {
