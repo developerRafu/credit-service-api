@@ -16,7 +16,8 @@ public enum UserConstantsEnum {
       null,
       null),
   ID(null, null, 1L),
-  USER_ROLE("ROLE_USER", null, null);
+  USER_ROLE("ROLE_USER", null, null),
+  DOCUMENT("60130256000145", null, null);
   private final String valueString;
   private final Integer valueInt;
   private final Long longValue;

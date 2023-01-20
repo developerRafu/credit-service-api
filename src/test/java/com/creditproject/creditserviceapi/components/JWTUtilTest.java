@@ -1,6 +1,7 @@
 package com.creditproject.creditserviceapi.components;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.ReflectionTestUtils.setField;
@@ -10,6 +11,7 @@ import com.creditproject.creditserviceapi.exceptions.InvalidTokenException;
 import com.creditproject.creditserviceapi.helpers.UserMockBuilder;
 import com.creditproject.creditserviceapi.helpers.enums.UserConstantsEnum;
 import com.creditproject.creditserviceapi.vo.enums.RequestEnums;
+import com.creditproject.creditserviceapi.vo.enums.TokenEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,7 +82,20 @@ class JWTUtilTest {
   }
 
   @Test
-  void shouldThrowsExceptionWhenClaimsIsNull() {
+  void shouldThrowsExceptionWhenHeaderIsNull() {
     assertThrows(InvalidTokenException.class, () -> jwtUtil.getAuth());
+  }
+
+  @Test
+  void shouldThrowsExceptionWhenClaimsIsNull() {
+    when(request.getHeader(anyString()))
+        .thenReturn(TokenEnum.BEARER.getValue() + UserConstantsEnum.TOKEN);
+    assertThrows(InvalidTokenException.class, () -> jwtUtil.getAuth());
+  }
+
+  @Test
+  void shouldReturnNullWhenClaimsIsNull() {
+    final var result = jwtUtil.getUsername("");
+    assertNull(result);
   }
 }
