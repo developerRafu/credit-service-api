@@ -37,8 +37,8 @@ public class UserServiceImpl implements IUserService {
   }
 
   @Override
-  public Optional<User> findByEmail(final String username) {
-    return Optional.empty();
+  public Optional<User> findByEmail(final String email) {
+    return repository.findByEmail(email);
   }
 
   @Override
