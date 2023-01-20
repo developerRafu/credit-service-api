@@ -9,9 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @NotNull
-public class RegisterRequest {
+public class ClientRegisterRequest {
   private String name;
   private String email;
-  private String password;
   private String documento;
 }

@@ -1,6 +1,6 @@
 package com.creditproject.creditserviceapi.helpers;
 
-import static com.creditproject.creditserviceapi.helpers.UserConstantsEnum.*;
+import static com.creditproject.creditserviceapi.helpers.enums.UserConstantsEnum.*;
 
 import com.creditproject.creditserviceapi.domain.User;
 import com.creditproject.creditserviceapi.domain.enums.Profile;
@@ -33,6 +33,11 @@ public class UserMockBuilder {
 
   public UserMockBuilder withProfile(final Profile profile) {
     this.user.profiles(Set.of(profile));
+    return this;
+  }
+
+  public UserMockBuilder withProfileEmpty() {
+    this.user.profiles(Set.of());
     return this;
   }
 }
