@@ -96,13 +96,12 @@ public class Handler {
   }
 
   @ExceptionHandler({Exception.class})
-  public ResponseEntity<Message> handleException(
-          final Exception ex, HttpServletRequest request) {
+  public ResponseEntity<Message> handleException(final Exception ex, HttpServletRequest request) {
     final var message =
-            messageComponent.get(
-                    MessageConstantsEnum.ADMIN_NOT_AVAILABLE.getCode(),
-                    MessageEnum.ERROR,
-                    HttpStatus.FORBIDDEN.value());
+        messageComponent.get(
+            MessageConstantsEnum.ADMIN_NOT_AVAILABLE.getCode(),
+            MessageEnum.ERROR,
+            HttpStatus.FORBIDDEN.value());
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
   }
 
