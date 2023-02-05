@@ -95,6 +95,17 @@ public class Handler {
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
   }
 
+  @ExceptionHandler({Exception.class})
+  public ResponseEntity<Message> handleException(
+          final Exception ex, HttpServletRequest request) {
+    final var message =
+            messageComponent.get(
+                    MessageConstantsEnum.ADMIN_NOT_AVAILABLE.getCode(),
+                    MessageEnum.ERROR,
+                    HttpStatus.FORBIDDEN.value());
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(message);
+  }
+
   private Message getMessageDataIntegrity(final DataIntegrityViolationException ex) {
     if (ex.getMessage().contains("email")) {
       final var message =
