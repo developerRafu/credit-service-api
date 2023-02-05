@@ -22,8 +22,7 @@ class JsonUtilsTest {
   @Test
   void shouldReturnAJSon() {
     final var result =
-        JsonUtils.convertToString(
-            mapper, UserAuthMockBuilder.builder().defaultValues().build());
+        JsonUtils.convertToString(mapper, UserAuthMockBuilder.builder().defaultValues().build());
     assertNotNull(result);
   }
 

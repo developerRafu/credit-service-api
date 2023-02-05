@@ -11,7 +11,8 @@ public enum MessageConstantsEnum {
   INVALID_PROFILE("CS-005"),
   INVALID_TOKEN("CS-006"),
   INVALID_REQUEST("CS-007"),
-  BAD_CREDENTIALS("CS-008");
+  BAD_CREDENTIALS("CS-008"),
+  NOT_ACESSABLE("CS-009");
   private final String code;
 
   MessageConstantsEnum(final String code) {

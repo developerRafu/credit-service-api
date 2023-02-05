@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/v1/clients")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -29,6 +29,7 @@ public class ClientRestController {
             .toUri();
     return ResponseEntity.created(uri).build();
   }
+
 
   @GetMapping
   public ResponseEntity<Page<ClientResponse>> getByUser(
